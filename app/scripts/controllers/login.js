@@ -59,7 +59,7 @@ angular.module('fbOauth2App')
         website: response.website,
         name:response.name
       };
-      $window.location.href = '/#!/main';
+      $window.location.href = '/FB_APP/#!/main';
 
       // $rootScope.page_token = page_token
       //   page_update(fb_page_id, {access_token: page_token, about: "3_The greatest possible updates at lowest possible time.. Join scienceopedia and get updated to world of science...categories__1"});
