@@ -22,12 +22,12 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/main', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'app/views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
       .when('/', {
-        templateUrl: 'views/login.html',
+        templateUrl: 'app/views/login.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
