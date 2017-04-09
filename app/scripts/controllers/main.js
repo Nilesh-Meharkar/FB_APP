@@ -47,7 +47,7 @@ angular.module('fbOauth2App')
                 website: row.website
               };
 
-              if(row.location != ""){
+              if(row.location != undefined){
                 updataion_map_with_token.location.city = row.city;
                 updataion_map_with_token.location.street = row.address;
               }
