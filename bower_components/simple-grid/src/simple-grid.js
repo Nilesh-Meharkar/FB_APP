@@ -11,35 +11,35 @@
                 },
 
                 link: function (scope, elem, attrs) {
-                    
+
                     function isEditable(editable) {
-                        $log.debug('isEditable');
+                        // $log.debug('isEditable');
                         if (angular.isUndefined(editable)) {
                             return true; // editable by default
                         }
                         return editable || false;
                     }
-                    
+
                     function initialize() {
                         scope.gridNum = gridNum;
                         gridNum += 1;
-                        
+
                         scope.page = [];
                         scope.selectedRow = null;
                         scope.focusedRow = null;
-                        
+
                         scope.$watchCollection('simpleGrid.getData()', function (newVal) {
                             scope.data = newVal;
                             scope.updatePage();
                         });
-                        
+
                         scope.$watch('simpleGrid.options.pageSize', scope.updatePage);
                         scope.$watch('simpleGrid.options.pageNum', scope.updatePage);
-                        
+
                         scope.$watch('simpleGrid.options.editable', function (editable) {
                             scope.gridIsEditable = isEditable(editable);
                         });
-                        
+
                         scope.$watch('simpleGrid.options.columns', function (newVal) {
                             angular.forEach(newVal, function (column) {
                                 if (column.inputType === 'select') {
@@ -48,9 +48,9 @@
                                 column.$title = column.title || scope.capitalize(column.field);
                             });
                         }, true);
-                        
+
                     }
-                    
+
                     scope.updatePage = function () {
                         var i,
                             pageSize,
@@ -70,7 +70,7 @@
                     };
 
                     scope.capitalize = function (str) {
-                        $log.debug('capitalize');
+                        // $log.debug('capitalize');
                         if (!str) {
                             return str;
                         }
@@ -94,7 +94,7 @@
                     };
 
                     scope.isInvalid = function (rowIndex) {
-                        $log.debug('isInvalid', rowIndex);
+                        // $log.debug('isInvalid', rowIndex);
                         var formCtrl = scope.$eval(scope.formName(rowIndex));
                         return formCtrl.$error;
                     };
@@ -126,7 +126,7 @@
                     };
 
                     scope.getCellText = function (row, column) {
-                        $log.debug('getCellText');//, row, column);
+                        // $log.debug('getCellText');//, row, column);
                         var cellValue = row[column.field];
                         if (column.inputType === 'select') {
                             return scope.getOptionTitleByValue(column.options, cellValue);
@@ -138,7 +138,7 @@
                     };
 
                     scope.getOptionTitleByValue = function (options, value) {
-                        $log.debug('getOptionTitleByValue');//, options, value);
+                        // $log.debug('getOptionTitleByValue');//, options, value);
                         // TODO: Highly ineffecient.
                         // TODO: Array.prototype.filter is not compatible with older browsers
                         var filteredOptions = options.filter(function (option) {
@@ -161,7 +161,7 @@
                     };
 
                     scope.selectRow = function (row) {
-                        $log.debug('selectRow', row);
+                        // $log.debug('selectRow', row);
                         if (!scope.simpleGrid.options.allowMultiSelect) {
                             if (scope.selectedRow && scope.selectedRow.$selected) {
                                 delete scope.selectedRow.$selected;
@@ -180,7 +180,7 @@
                     };
 
                     scope.setFocusedRow = function (row) {
-                        $log.debug('setFocusedRow', row);
+                        // $log.debug('setFocusedRow', row);
                         if (scope.focusedRow === row) {
                             return;
                         }
@@ -208,7 +208,7 @@
                     };
 
                     scope.cellFocused = function (row, column) {
-                        $log.debug('cellFocused', row, column);
+                        // $log.debug('cellFocused', row, column);
                         scope.setFocusedRow(row);
                         if (!scope.simpleGrid.options.allowMultiSelect) {
                             scope.selectRow(row);
@@ -217,9 +217,9 @@
                             scope.simpleGrid.options.cellFocused(row, column);
                         }
                     };
-                    
+
                     scope.getOptions = function (options) {
-                        $log.debug('getOptions');//, options);
+                        // $log.debug('getOptions');//, options);
                         if (options.length && angular.isString(options[0])) {
                             // TODO: Not compatible with old browsers
                             return options.map(function (val) { return { value: val, title: scope.capitalize(val) }; });
