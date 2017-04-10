@@ -19,25 +19,6 @@ angular.module('fbOauth2App')
     // fetch the status on load
     FB.getLoginStatus(handleSessionResponse);
 
-    /*
-    ///!*!/!*!/!*!/!*!/!*
-    //
-    // $('#login').bind('click', function () {
-    //   console.log("Login");
-    //   FB.login(handleSessionResponse, {
-    //     scope: "manage_pages,business_management"
-    //   });
-    // });
-    // $('#logout').bind('click', function () {
-    //   console.log("Logout");
-    //
-    //   FB.logout(handleSessionResponse);
-    // });
-    //
-    *!/!*!/!*!/!*!/!*!/
-
-    */
-
     $scope.fb_login = function() {
       console.log("Login");
       FB.login(handleSessionResponse, {
@@ -82,9 +63,11 @@ angular.module('fbOauth2App')
           angular.forEach(response.data, function(value, key) {
             FB.api('/' + [value.id] + '?fields=id,name,access_token,business,contact_address,about,category,location,website', page_callback);
           });
-          setTimeout(function(){
-            $window.location.href = '/FB_APP/#!/main';
-          }, 4000);
+            setTimeout(function(){
+                $scope.$apply(function() {
+                    $location.path("/main");
+                });
+            }, 3000);
         });
       }
     }

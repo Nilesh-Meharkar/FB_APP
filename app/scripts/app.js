@@ -19,7 +19,9 @@ angular
     'socialLogin',
     'simpleGrid'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider, $resourceProvider) {
+
+    $resourceProvider.defaults.stripTrailingSlashes = false;
     $routeProvider
       .when('/main', {
         templateUrl: 'app/views/main.html',
@@ -33,5 +35,6 @@ angular
       })
       .otherwise({
         redirectTo: '/'
-      });
+    });
+    $locationProvider.html5Mode(false).hashPrefix('');
   });
